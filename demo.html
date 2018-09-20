@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JQuery ImageMaps Plugin</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+	<style type="text/css">
+		body{overflow-x: hidden; overflow-y: auto;}
+		.imagemaps-wrapper{display: flex; justify-content: center; align-items: center; position: relative;}
+		.imagemaps-wrapper img{max-width: 100%;}
+		.imagemaps-control{}
+		.table td, .table th{vertical-align: middle;}
+	</style>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>Demo1：无缩放</h3>
+				<div class="imagemaps-wrapper">
+				    <img src="https://image8.wbiao.co/mall/b1947aa41d064f5d84a8adb3f395e30d.jpg?x-oss-process=image/resize,m_lfit,w_1200" draggable="false">
+				</div>
+				<div class="imagemaps-control">
+					<fieldset>
+						<legend>热区设置</legend>
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">链接</th>
+									<th scope="col">打开方式</th>
+									<th scope="col">操作</th>
+								</tr>
+							</thead>
+							<tbody class="imagemaps-output">
+								<tr class="item-###">
+									<th scope="row">###</th>
+									<td><input type="text" class="form-control area-href"></td>
+									<td>
+										<select class="form-control area-target">
+											<option value="_self">默认</option>
+											<option value="_blank">新窗口</option>
+										</select>
+									</td>
+									<td>
+										<button type="button" class="btn btn-danger btn-delete">删除</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</fieldset>
+					<div>
+						<button type="button" class="btn btn-info btn-add-map">添加热区</button>
+						<button type="button" class="btn btn-success btn-get-map">获取热区信息</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>Demo2：大尺寸图片，热区自适应</h3>
+				<div class="imagemaps-wrapper">
+				    <img src="https://image8.wbiao.co/mall/b1947aa41d064f5d84a8adb3f395e30d.jpg" draggable="false">
+				</div>
+				<div class="imagemaps-control">
+					<fieldset>
+						<legend>热区设置</legend>
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">链接</th>
+									<th scope="col">打开方式</th>
+									<th scope="col">操作</th>
+								</tr>
+							</thead>
+							<tbody class="imagemaps-output">
+								<tr class="item-###">
+									<th scope="row">###</th>
+									<td><input type="text" class="form-control area-href"></td>
+									<td>
+										<select class="form-control area-target">
+											<option value="_self">默认</option>
+											<option value="_blank">新窗口</option>
+										</select>
+									</td>
+									<td>
+										<button type="button" class="btn btn-danger btn-delete">删除</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</fieldset>
+					<div>
+						<button type="button" class="btn btn-info btn-add-map">添加热区</button>
+						<button type="button" class="btn btn-success btn-get-map">获取热区信息</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+		<div class="row">
+			<div class="col-xs-12">
+				<h3>Demo3：默认数据（数据恢复）</h3>
+				<div class="imagemaps-wrapper">
+				    <img src="https://image8.wbiao.co/mall/b1947aa41d064f5d84a8adb3f395e30d.jpg" draggable="false" usemap="#imagemaps3">
+				    <map class="imagemaps" name="imagemaps3"><area shape="rect" name="imagemaps-area" class="imagemaps-area0" coords="545,75,1047,389" href="https://www.wbiao.cn" target="_blank"></map>
+				</div>
+				<div class="imagemaps-control">
+					<fieldset>
+						<legend>热区设置</legend>
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">链接</th>
+									<th scope="col">打开方式</th>
+									<th scope="col">操作</th>
+								</tr>
+							</thead>
+							<tbody class="imagemaps-output">
+								<tr class="item-###">
+									<th scope="row">###</th>
+									<td><input type="text" class="form-control area-href"></td>
+									<td>
+										<select class="form-control area-target">
+											<option value="_self">默认</option>
+											<option value="_blank">新窗口</option>
+										</select>
+									</td>
+									<td>
+										<button type="button" class="btn btn-danger btn-delete">删除</button>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</fieldset>
+					<div>
+						<button type="button" class="btn btn-info btn-add-map">添加热区</button>
+						<button type="button" class="btn btn-success btn-get-map">获取热区信息</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<br>
+	</div>
+
+	<script type="text/javascript" src="jquery.imagemaps.js"></script>
+	<script type="text/javascript">
+	$('.imagemaps-wrapper').imageMaps({
+		addBtn: '.btn-add-map',
+        // rectWidth: 100,
+        // rectHeight: 60,
+        // areaHref: '.area-href',
+        // areaTarget: '.area-target',
+        // btnDelete: '.btn-delete',
+		output: '.imagemaps-output',
+		stopCallBack: function(active, coords){
+			// console.log(active);
+			// console.log(coords);
+		}
+	});
+
+	$('.btn-get-map').on('click', function(){
+		let oParent = $(this).parent().parent().parent();
+		let result  = oParent.find('.imagemaps-wrapper').clone();
+		result.children('div').remove();
+		// console.log(result.html());
+		alert(result.html());
+	});
+	</script>
+</body>
+
+</html>
