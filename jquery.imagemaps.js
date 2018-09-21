@@ -1,7 +1,7 @@
 /*!
  * jQuery 创建图片热点链接 插件
  * version: 1.0.0-2018.09.19
- * Requires jQuery v1.5 or later
+ * Requires jQuery v1.5 or later、ES6
  * Copyright (c) 2018 Tiac
  * https://github.com/Tiacx/jquery.imagemaps.js
  */
@@ -75,11 +75,12 @@
         };
 
         // 模板
-        let itemTemplate = $(options.output+':eq(0)').html();
+        let itemTemplate = localStorage.getItem('imageMapsItemTemplate') || $(options.output+':eq(0)').html();
+        localStorage.setItem('imageMapsItemTemplate', itemTemplate);
         $(options.output).html('');
 
         // 设置当前热区的坐标
-        let setCoords = function(_this){
+        let setCoords = function(_this, doingRecover=false){
             if(_this){
                 coords.x1 = parseInt(_this.css('left'));
                 coords.y1  = parseInt(_this.css('top'));
@@ -96,7 +97,7 @@
             let oImg   = active.parent().children('img');
             let ratio  = oImg.width()/oImg.get(0).naturalWidth;
 
-            oArea.attr('coords', `${parseInt(coords.x1/ratio)},${parseInt(coords.y1/ratio)},${parseInt(coords.x2/ratio)},${parseInt(coords.y2/ratio)}`);
+            if(doingRecover==false) oArea.attr('coords', `${parseInt(coords.x1/ratio)},${parseInt(coords.y1/ratio)},${parseInt(coords.x2/ratio)},${parseInt(coords.y2/ratio)}`);
 
             output.find(`.item-${index+1} `+options.areaHref).val( oArea.attr('href') );
             output.find(`.item-${index+1} `+options.areaTarget).val( oArea.attr('target') );
@@ -127,7 +128,7 @@
             let oImg   = _this.children('img');
             let ratio  = oImg.width()/oImg.get(0).naturalWidth;
 
-            $(options.addBtn+':eq('+ i +')').on('click', function(){
+            $(options.addBtn+':eq('+ i +')').unbind('click').on('click', function(){
                 let count = _this.attr('data-count');
                 count++;
                 _this.attr('data-count', count);
@@ -142,7 +143,7 @@
                     return parseInt( parseInt(v)*ratio );
                 });
 
-                let oDiv   = $(`<div id="imagemaps-rect-${i}-${index}" style="width:${(coords[2]-coords[0]) || options.rectWidth}px;height:${(coords[3]-coords[1]) || options.rectHeight}px;position:absolute;left:${coords[0] || 0}px;top:${coords[1] || 0}px;background-color:rgba(255,255,255,0.3)" data-index="${index}">${count}</div>`);
+                let oDiv   = $(`<div id="imagemaps-rect-${i}-${index}" style="width:${(coords[2]-coords[0]) || options.rectWidth}px;height:${(coords[3]-coords[1]) || options.rectHeight}px;position:absolute;left:${coords[0] || 0}px;top:${coords[1] || 0}px;background-color:rgba(255,255,255,0.5)" data-index="${index}">${count}</div>`);
                 _this.append(oDiv);
                 oDiv.draggable(options.draggableOptions);
                 oDiv.resizable(options.resizableOptions);
@@ -157,7 +158,7 @@
                 });
 
                 active = oDiv;
-                setCoords();
+                setCoords(null, doingRecover);
 
                 // 更新热区链接和打开方式
                 oTr.find(options.areaHref+','+options.areaTarget).on('change', function(){
@@ -171,7 +172,7 @@
                 });
 
                 // 删除热区
-                oTr.find(options.btnDelete).on('click', function(){
+                oTr.find(options.btnDelete).unbind('click').on('click', function(){
                     active       = $(`#imagemaps-rect-${i}-${index}`);
                     let oWrapper = active.parent();
                     let oArea    = oWrapper.find('.imagemaps .imagemaps-area'+index);
