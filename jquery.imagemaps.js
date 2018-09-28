@@ -114,9 +114,10 @@
             let doingRecover = false;
             if(_this.find('.imagemaps').length==0)
             {
-                var oMap  = $(`<map class="imagemaps" name="imagemaps${i+1}"></map>`);
+                let timeStamp = (new Date()).getTime();
+                var oMap      = $(`<map class="imagemaps" name="imagemaps${timeStamp}"></map>`);
                 _this.append(oMap);
-                _this.children('img').attr('usemap', `#imagemaps${i+1}`);
+                _this.children('img').attr('usemap', `#imagemaps${timeStamp}`);
             }
             else
             {
